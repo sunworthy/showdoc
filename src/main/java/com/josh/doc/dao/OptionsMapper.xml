@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.josh.doc.dao.OptionsMapper">
+  <resultMap id="BaseResultMap" type="com.josh.doc.entity.Options">
+    <id column="option_id" jdbcType="INTEGER" property="optionId" />
+    <result column="option_name" jdbcType="VARCHAR" property="optionName" />
+    <result column="option_value" jdbcType="VARCHAR" property="optionValue" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    option_id, option_name, option_value
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from options
+    where option_id = #{optionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from options
+    where option_id = #{optionId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.josh.doc.entity.Options">
+    insert into options (option_id, option_name, option_value
+      )
+    values (#{optionId,jdbcType=INTEGER}, #{optionName,jdbcType=VARCHAR}, #{optionValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.josh.doc.entity.Options">
+    insert into options
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optionId != null">
+        option_id,
+      </if>
+      <if test="optionName != null">
+        option_name,
+      </if>
+      <if test="optionValue != null">
+        option_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optionId != null">
+        #{optionId,jdbcType=INTEGER},
+      </if>
+      <if test="optionName != null">
+        #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionValue != null">
+        #{optionValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.josh.doc.entity.Options">
+    update options
+    <set>
+      <if test="optionName != null">
+        option_name = #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionValue != null">
+        option_value = #{optionValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where option_id = #{optionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.josh.doc.entity.Options">
+    update options
+    set option_name = #{optionName,jdbcType=VARCHAR},
+      option_value = #{optionValue,jdbcType=VARCHAR}
+    where option_id = #{optionId,jdbcType=INTEGER}
+  </update>
+</mapper>

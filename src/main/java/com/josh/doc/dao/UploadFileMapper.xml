@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.josh.doc.dao.UploadFileMapper">
+  <resultMap id="BaseResultMap" type="com.josh.doc.entity.UploadFile">
+    <id column="file_id" jdbcType="INTEGER" property="fileId" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="display_name" jdbcType="VARCHAR" property="displayName" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="file_size" jdbcType="VARCHAR" property="fileSize" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="page_id" jdbcType="INTEGER" property="pageId" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="visit_times" jdbcType="TIMESTAMP" property="visitTimes" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="real_url" jdbcType="VARCHAR" property="realUrl" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    file_id, sign, display_name, file_type, file_size, uid, page_id, item_id, visit_times, 
+    add_time, real_url, last_update_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upload_file
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from upload_file
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.josh.doc.entity.UploadFile">
+    insert into upload_file (file_id, sign, display_name, 
+      file_type, file_size, uid, 
+      page_id, item_id, visit_times, 
+      add_time, real_url, last_update_time
+      )
+    values (#{fileId,jdbcType=INTEGER}, #{sign,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, 
+      #{pageId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{visitTimes,jdbcType=TIMESTAMP}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{realUrl,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.josh.doc.entity.UploadFile">
+    insert into upload_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="displayName != null">
+        display_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="pageId != null">
+        page_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="visitTimes != null">
+        visit_times,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="realUrl != null">
+        real_url,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pageId != null">
+        #{pageId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="visitTimes != null">
+        #{visitTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realUrl != null">
+        #{realUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.josh.doc.entity.UploadFile">
+    update upload_file
+    <set>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pageId != null">
+        page_id = #{pageId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="visitTimes != null">
+        visit_times = #{visitTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realUrl != null">
+        real_url = #{realUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.josh.doc.entity.UploadFile">
+    update upload_file
+    set sign = #{sign,jdbcType=VARCHAR},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      page_id = #{pageId,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      visit_times = #{visitTimes,jdbcType=TIMESTAMP},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      real_url = #{realUrl,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+</mapper>

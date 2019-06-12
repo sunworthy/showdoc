@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.josh.doc.dao.PageHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.josh.doc.entity.PageHistory">
+    <id column="page_history_id" jdbcType="INTEGER" property="pageHistoryId" />
+    <result column="page_id" jdbcType="INTEGER" property="pageId" />
+    <result column="author_uid" jdbcType="INTEGER" property="authorUid" />
+    <result column="author_username" jdbcType="VARCHAR" property="authorUsername" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="cat_id" jdbcType="INTEGER" property="catId" />
+    <result column="page_title" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="page_content" jdbcType="VARCHAR" property="pageContent" />
+    <result column="s_number" jdbcType="INTEGER" property="sNumber" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="page_comments" jdbcType="VARCHAR" property="pageComments" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    page_history_id, page_id, author_uid, author_username, item_id, cat_id, page_title, 
+    page_content, s_number, add_time, page_comments
+  </sql>
+  <select id="selectByExample" parameterType="com.josh.doc.entity.PageHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from page_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from page_history
+    where page_history_id = #{pageHistoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from page_history
+    where page_history_id = #{pageHistoryId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.josh.doc.entity.PageHistory">
+    insert into page_history (page_history_id, page_id, author_uid, 
+      author_username, item_id, cat_id, 
+      page_title, page_content, s_number, 
+      add_time, page_comments)
+    values (#{pageHistoryId,jdbcType=INTEGER}, #{pageId,jdbcType=INTEGER}, #{authorUid,jdbcType=INTEGER}, 
+      #{authorUsername,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, #{catId,jdbcType=INTEGER}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{pageContent,jdbcType=VARCHAR}, #{sNumber,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{pageComments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.josh.doc.entity.PageHistory">
+    insert into page_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pageHistoryId != null">
+        page_history_id,
+      </if>
+      <if test="pageId != null">
+        page_id,
+      </if>
+      <if test="authorUid != null">
+        author_uid,
+      </if>
+      <if test="authorUsername != null">
+        author_username,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="catId != null">
+        cat_id,
+      </if>
+      <if test="pageTitle != null">
+        page_title,
+      </if>
+      <if test="pageContent != null">
+        page_content,
+      </if>
+      <if test="sNumber != null">
+        s_number,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="pageComments != null">
+        page_comments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pageHistoryId != null">
+        #{pageHistoryId,jdbcType=INTEGER},
+      </if>
+      <if test="pageId != null">
+        #{pageId,jdbcType=INTEGER},
+      </if>
+      <if test="authorUid != null">
+        #{authorUid,jdbcType=INTEGER},
+      </if>
+      <if test="authorUsername != null">
+        #{authorUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="catId != null">
+        #{catId,jdbcType=INTEGER},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pageContent != null">
+        #{pageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pageComments != null">
+        #{pageComments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.josh.doc.entity.PageHistory">
+    update page_history
+    <set>
+      <if test="pageId != null">
+        page_id = #{pageId,jdbcType=INTEGER},
+      </if>
+      <if test="authorUid != null">
+        author_uid = #{authorUid,jdbcType=INTEGER},
+      </if>
+      <if test="authorUsername != null">
+        author_username = #{authorUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="catId != null">
+        cat_id = #{catId,jdbcType=INTEGER},
+      </if>
+      <if test="pageTitle != null">
+        page_title = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pageContent != null">
+        page_content = #{pageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sNumber != null">
+        s_number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pageComments != null">
+        page_comments = #{pageComments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where page_history_id = #{pageHistoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.josh.doc.entity.PageHistory">
+    update page_history
+    set page_id = #{pageId,jdbcType=INTEGER},
+      author_uid = #{authorUid,jdbcType=INTEGER},
+      author_username = #{authorUsername,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=INTEGER},
+      cat_id = #{catId,jdbcType=INTEGER},
+      page_title = #{pageTitle,jdbcType=VARCHAR},
+      page_content = #{pageContent,jdbcType=VARCHAR},
+      s_number = #{sNumber,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      page_comments = #{pageComments,jdbcType=VARCHAR}
+    where page_history_id = #{pageHistoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.josh.doc.dao.ItemMemberMapper">
+  <resultMap id="BaseResultMap" type="com.josh.doc.entity.ItemMember">
+    <id column="item_member_id" jdbcType="INTEGER" property="itemMemberId" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="member_group_id" jdbcType="INTEGER" property="memberGroupId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    item_member_id, item_id, uid, username, add_time, member_group_id
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from item_member
+    where item_member_id = #{itemMemberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from item_member
+    where item_member_id = #{itemMemberId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.josh.doc.entity.ItemMember">
+    insert into item_member (item_member_id, item_id, uid, 
+      username, add_time, member_group_id
+      )
+    values (#{itemMemberId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{memberGroupId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.josh.doc.entity.ItemMember">
+    insert into item_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemMemberId != null">
+        item_member_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="memberGroupId != null">
+        member_group_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemMemberId != null">
+        #{itemMemberId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberGroupId != null">
+        #{memberGroupId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.josh.doc.entity.ItemMember">
+    update item_member
+    <set>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberGroupId != null">
+        member_group_id = #{memberGroupId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where item_member_id = #{itemMemberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.josh.doc.entity.ItemMember">
+    update item_member
+    set item_id = #{itemId,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      member_group_id = #{memberGroupId,jdbcType=INTEGER}
+    where item_member_id = #{itemMemberId,jdbcType=INTEGER}
+  </update>
+</mapper>
